@@ -9,8 +9,8 @@ class CreateWkMorphTagTable extends Migration
     public function up()
     {
         Schema::create(config('wk-core.table.morph-tag.tags'), function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->nullableMorphs('host');
+            $table->uuid('id');
+            $table->nullableUuidMorphs('host');
             $table->string('serial')->nullable();
             $table->string('identifier');
             $table->unsignedBigInteger('order')->nullable();
@@ -19,6 +19,7 @@ class CreateWkMorphTagTable extends Migration
             $table->timestampsTz();
             $table->softDeletes();
 
+            $table->primary('id');
             $table->index('serial');
             $table->index('identifier');
             $table->index('is_enabled');
@@ -26,9 +27,9 @@ class CreateWkMorphTagTable extends Migration
         });
         if (!config('wk-morph-tag.onoff.core-lang_core')) {
             Schema::create(config('wk-core.table.morph-tag.tags_lang'), function (Blueprint $table) {
-                $table->bigIncrements('id');
-                $table->morphs('morph');
-                $table->unsignedBigInteger('user_id')->nullable();
+                $table->uuid('id');
+                $table->nullableUuidMorphs('morph');
+                $table->uuid('user_id')->nullable();
                 $table->string('code');
                 $table->string('key');
                 $table->text('value')->nullable();
@@ -41,11 +42,13 @@ class CreateWkMorphTagTable extends Migration
                     ->on(config('wk-core.table.user'))
                     ->onDelete('set null')
                     ->onUpdate('cascade');
+
+                $table->primary('id');
             });
         }
         Schema::create(config('wk-core.table.morph-tag.tags_morphs'), function (Blueprint $table) {
-            $table->unsignedBigInteger('tag_id')->nullable();
-            $table->morphs('morph');
+            $table->uuid('tag_id')->nullable();
+            $table->uuidMorphs('morph');
 
             $table->foreign('tag_id')->references('id')
                   ->on(config('wk-core.table.morph-tag.tags'))

@@ -2,10 +2,10 @@
 
 namespace WalkerChiu\MorphTag\Models\Entities;
 
-use WalkerChiu\Core\Models\Entities\Entity;
 use WalkerChiu\Core\Models\Entities\LangTrait;
+use WalkerChiu\Core\Models\Entities\UuidEntity;
 
-class Tag extends Entity
+class Tag extends UuidEntity
 {
     use LangTrait;
 
@@ -60,9 +60,9 @@ class Tag extends Entity
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphedByMany
      */
-    public function stores()
+    public function sites()
     {
-        return $this->morphedByMany(config('wk-core.class.mall-store.store'), 'morph', config('wk-core.table.morph-tag.tags_morphs'));
+        return $this->morphedByMany(config('wk-core.class.site.site'), 'morph', config('wk-core.table.morph-tag.tags_morphs'));
     }
 
     /**

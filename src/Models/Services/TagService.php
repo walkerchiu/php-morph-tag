@@ -18,7 +18,7 @@ class TagService
 
     /**
      * @param String $host_type
-     * @param Int    $host_id
+     * @param String $host_id
      * @param String $code
      * @return Array
      */

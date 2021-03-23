@@ -23,7 +23,7 @@ class TagRepository extends Repository
 
     /**
      * @param String  $host_type
-     * @param Int     $host_id
+     * @param String  $host_id
      * @param String  $code
      * @param Array   $data
      * @param Int     $page
@@ -99,7 +99,7 @@ class TagRepository extends Repository
 
     /**
      * @param String $host_type
-     * @param Int    $host_id
+     * @param String $host_id
      * @param String $code
      * @return Array
      */
@@ -133,7 +133,7 @@ class TagRepository extends Repository
 
     /**
      * @param String  $host_type
-     * @param Int     $host_id
+     * @param String  $host_id
      * @param String  $code
      * @param String  $target
      * @param Boolean $target_is_enabled
