@@ -139,4 +139,16 @@ class Tag extends UuidEntity
     {
         return $this->morphedByMany(config('wk-core.class.mall-shelf.stock'), 'morph', config('wk-core.table.morph-tag.tags_morphs'));
     }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function isOwnedBy($user)
+    {
+        if (empty($user))
+            return false;
+
+        return $this->host->user_id == $user->id;
+    }
 }
