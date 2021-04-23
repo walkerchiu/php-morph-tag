@@ -7,12 +7,16 @@ trait TagTrait
     /**
      * Get all of the tags for the object.
      *
+     * @param Boolean $is_enabled
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
-    public function tags()
+    public function tags($is_enabled = null)
     {
         $table = config('wk-core.table.morph-tag.tags_morphs');
-        return $this->morphToMany(config('wk-core.class.morph-tag.tag'), 'morph', $table);
+        return $this->morphToMany(config('wk-core.class.morph-tag.tag'), 'morph', $table)
+                    ->unless( is_null($is_enabled), function ($query) use ($is_enabled) {
+                        return $query->where('is_enabled', $is_enabled);
+                    });
     }
 
     /**
