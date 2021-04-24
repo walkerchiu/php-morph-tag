@@ -67,11 +67,11 @@ trait TagTrait
      */
     public function attachTag($tag)
     {
-        if(is_object($tag)) {
+        if (is_object($tag)) {
             $tag = $tag->getKey();
         }
 
-        if(is_array($tag)) {
+        if (is_array($tag)) {
             $tag = $tag['id'];
         }
 
